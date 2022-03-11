@@ -14,6 +14,20 @@
 
 ---
 
+## Iniciar projeto:
+
+### Instalar dependências
+```
+npm install
+```
+
+### Rodar projeto
+```
+npm run dev
+```
+
+---
+
 ## Endpoints
 
 ### Post url:
