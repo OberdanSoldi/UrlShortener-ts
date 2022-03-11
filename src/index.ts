@@ -1,6 +1,13 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const port = 3000;
+
 app.use(express.json());
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+import postUrl from '../src/routes/postUrl/index';
+import getUrl from '../src/routes/redirectUrl/index';
+
+app.post('/postUrl', postUrl);
+app.get('/:routename', getUrl);
+
+const port: number = 4000;
+app.listen(port, () => {console.log('Server is running on port ' + port)});
