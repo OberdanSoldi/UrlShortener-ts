@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import Url from '../../Schema'
+import express from 'express';
 
-export default (req: Request, res: Response) => {
+const router = express.Router();
+
+router.post('/', (req: Request, res: Response) => {
     const { urlName, urlToRedirect}= req.body;
     console.log(urlName, urlToRedirect);
     const url = new Url({
@@ -23,4 +26,6 @@ export default (req: Request, res: Response) => {
             })
         }
     })
-}
+})
+
+export default router;

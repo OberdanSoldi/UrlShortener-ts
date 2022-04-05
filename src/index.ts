@@ -3,11 +3,11 @@ const app = express();
 
 app.use(express.json());
 
-import postUrl from '../src/routes/postUrl/index';
-import getUrl from '../src/routes/redirectUrl/index';
+import postUrl from './routes/create/index';
+import getUrl from './routes/redirect/index';
 
-app.post('/postUrl', postUrl);
-app.get('/:routename', getUrl);
+app.use('/postUrl', postUrl);
+app.use('/', getUrl);
 
 const port: number = 4000;
 app.listen(port, () => {console.log('Server is running on port ' + port)});
