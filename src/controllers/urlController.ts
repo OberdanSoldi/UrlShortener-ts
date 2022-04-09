@@ -1,10 +1,7 @@
 import { Request, Response } from "express";
-import Url from '../../Schema'
-import express from 'express';
+import Url from '../Schema/index';
 
-const router = express.Router();
-
-router.post('/', (req: Request, res: Response) => {
+const create = (req: Request, res: Response) => {
     const { urlName, urlToRedirect}= req.body;
     console.log(urlName, urlToRedirect);
     const url = new Url({
@@ -26,6 +23,31 @@ router.post('/', (req: Request, res: Response) => {
             })
         }
     })
-})
+}
 
-export default router;
+const redirect = (req: Request, res: Response) => {
+    const name = req.params.routename;
+	Url.findOne({ urlName: name }, (err: Error, url: any) => {
+		if (err) {
+			res.status(500).json({
+				message: 'Error getting url',
+				status: 500,
+				error: err
+			});
+		} else {
+			if (url) {
+				res.redirect(url.urlToRedirect);
+			} else {
+				res.status(404).json({
+					message: 'Url not found',
+					status: 404
+				});
+			}
+		}
+	});
+}
+
+export {
+    create,
+    redirect
+}
